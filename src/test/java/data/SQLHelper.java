@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;

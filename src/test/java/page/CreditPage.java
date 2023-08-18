@@ -1,6 +1,6 @@
-package Page;
+package page;
 
-import Data.DataHelper;
+import data.DataHelper;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
@@ -46,7 +46,7 @@ public class CreditPage {
         heading.shouldBe(visible);
     }
 
-    public void FillingOutForm(DataHelper.CardInfo cardInfo) {
+    public void fillingOutForm(DataHelper.CardInfo cardInfo) {
         cardNumberField.setValue(cardInfo.getNumberCard());
         monthField.setValue(cardInfo.getValidMonth());
         yearField.setValue(cardInfo.getValidYear());

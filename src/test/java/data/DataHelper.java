@@ -62,6 +62,11 @@ public class DataHelper {
         return new CardInfo("4444 4444 4444 4441", "13", getValidYear(), getValidHolder(), getValidCVV());
     }
 
+    /*Одна цифра в поле "Месяц"*/
+    public static CardInfo getOneNumMonth() {
+        return new CardInfo("4444 4444 4444 4441", "1", getValidYear(), getValidHolder(), getValidCVV());
+    }
+
     /*Пустое поле "Год"*/
     public static CardInfo getEmptyYearField() {
         return new CardInfo("4444 4444 4444 4441", getValidMonth(), "", getValidHolder(), getValidCVV());
@@ -80,6 +85,11 @@ public class DataHelper {
     /*Год, превышающий срок карты (+6)*/
     public static CardInfo getOverYear() {
         return new CardInfo("4444 4444 4444 4441", getValidMonth(), getOver6Years(), getValidHolder(), getValidCVV());
+    }
+
+    /*Год окончания карты*/
+    public static CardInfo getLstYear() {
+        return new CardInfo("4444 4444 4444 4441", getValidMonth(), getLastYear(), getValidHolder(), getValidCVV());
     }
 
     /*Пустое поле "Владелец"*/
@@ -128,7 +138,7 @@ public class DataHelper {
     }
 
     public static String getValidMonth() {
-        String validMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
+        String validMonth = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
         return validMonth;
     }
 
@@ -150,6 +160,11 @@ public class DataHelper {
     public static String getOver6Years() {
         String Over6Years = LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("yy"));
         return Over6Years;
+    }
+
+    public static String getLastYear() {
+        String LastYear = LocalDate.now().plusYears(5).format(DateTimeFormatter.ofPattern("yy"));
+        return LastYear;
     }
 
     public static String getValidHolder() {

@@ -8,6 +8,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class DebitPage {
@@ -19,32 +20,31 @@ public class DebitPage {
         cvvField.setValue(cardInfo.getValidCVV());
         continueButton.click();
     }
+    public DebitPage() {
+        heading.shouldBe(visible);
+    }
 
     /*поля и кнопки*/
     private SelenideElement heading = $x("//h3[text()='Оплата по карте']");
-    private static SelenideElement cardNumberField = $x("//span[text()='Номер карты']");
-    private static SelenideElement monthField = $x("//span[text()='Месяц']");
-    private static SelenideElement yearField = $x("//span[text()='Год']");
-    private static SelenideElement holderField = $x("//span[text()='Владелец']");
-    private static SelenideElement cvvField = $x("//span[contains(text(),'CVV')]");
+    private static SelenideElement cardNumberField = $x("//span[text()='Номер карты']/..//input");
+    private static SelenideElement monthField = $x("//span[text()='Месяц']/..//input");
+    private static SelenideElement yearField = $x("//span[text()='Год']/..//input");
+    private static SelenideElement holderField = $x("//span[text()='Владелец']/..//input");
+    private static SelenideElement cvvField = $x("//span[contains(text(),'CVV')]/..//input");
     private static SelenideElement continueButton = $x("//span[text()='Продолжить']");
 
     /*всплывающие сообщения*/
-    private SelenideElement successNotification = $x("//div[contains(@class,'notification_status_ok')]");
+    private SelenideElement successNotification = $(".notification_status_ok");
     private SelenideElement errorNotification = $x("//div[contains(@class, 'notification_status_error')]");
-    private SelenideElement closeIcon = $x("//span[contains(@class, 'icon_name_close')]");
     private SelenideElement invalidFormat = $x("//span[contains(text(), 'Неверный формат')]");
     private SelenideElement requiredField = $x("//span[contains(text(), 'Поле обязательно')]");
     private SelenideElement incorrectDeadline = $x("//span[contains(text(), 'Неверно указан срок')]");
     private SelenideElement deadlineIsOver = $x("//span[contains(text(), 'Истёк срок')]");
-    public void successNotification() {
+    public void setSuccessNotificationVisible() {
         successNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Операция одобрена Банком."));
     }
     public void errorNotification() {
         errorNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
-    }
-    public void closeIcon() {
-        closeIcon.shouldBe(visible, Duration.ofSeconds(10));
     }
     public void invalidFormat() {
         invalidFormat.shouldBe(visible).shouldHave(text("Неверный формат"));
@@ -58,8 +58,6 @@ public class DebitPage {
     public void deadlineIsOver() {
         deadlineIsOver.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
-    public DebitPage() {
-        heading.shouldBe(visible);
-    }
+
 
 }

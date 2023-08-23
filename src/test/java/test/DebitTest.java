@@ -42,12 +42,12 @@ public class DebitTest {
     @DisplayName("Buy by approved card")
     void shouldTestBuyWithApprovedCard() {
         debitPage.fillingOutForm(DataHelper.getNumberApprovedCard());
-        debitPage.successNotification();
+        debitPage.setSuccessNotificationVisible();
         assertEquals("APPROVED", SQLHelper.getStatusForPayment());
     }
 
     @Test
-    @DisplayName("Покупка отклоненной картой")
+    @DisplayName("Buy by declined card")
     void shouldTestBuyWithDeclinedCard() {
         debitPage.fillingOutForm(DataHelper.getNumberDeclinedCard());
         debitPage.errorNotification();
@@ -55,148 +55,161 @@ public class DebitTest {
     }
 
     @Test
-    @DisplayName("Незаполненное поле 'Номер карты'")
+    @DisplayName("Empty card number field")
     void shouldTestEmptyCardNumberField() {
         debitPage.fillingOutForm(DataHelper.getEmptyCardField());
         debitPage.requiredField();
-
     }
 
     @Test
-    @DisplayName("В поле 'Номер карты' 16 символов")
+    @DisplayName("15 simbols in card number field")
     void shouldTestNumberLess16Digits(){
         debitPage.fillingOutForm(DataHelper.getNumberless16digits());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Покупка картой со случайным номером")
+    @DisplayName("Random number card")
     void shouldTestRandomNumberCard() {
         debitPage.fillingOutForm(DataHelper.getRandomNumber());
         debitPage.errorNotification();
     }
 
     @Test
-    @DisplayName("Покупка с номером карты 0000 0000 0000 0000")
+    @DisplayName("Card Number '0000 0000 0000 0000'")
     void shouldTestZeroNumberCard() {
         debitPage.fillingOutForm(DataHelper.getZeroNumber());
-        debitPage.errorNotification();
+        debitPage.invalidFormat();
     }
     
     @Test
-    @DisplayName("Покупка с незаполненным полем 'Месяц'")
+    @DisplayName("Empty month field")
     void shouldTestEmptyMonthField() {
         debitPage.fillingOutForm(DataHelper.getEmptyMonthField());
         debitPage.requiredField();
     }
 
     @Test
-    @DisplayName("Месяц ранее текущего в поле 'Месяц'")
+    @DisplayName("Earlier month in month field")
     void shouldTestEarlierMonth() {
         debitPage.fillingOutForm(DataHelper.getEarlierMonth());
-        debitPage.successNotification();
+        debitPage.setSuccessNotificationVisible();
     }
 
     @Test
-    @DisplayName("Невалидное значение '00' в поле 'Месяц'")
+    @DisplayName("'00' in month field")
     void shouldTestZeroMonth() {
         debitPage.fillingOutForm(DataHelper.get00Month());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Невалидное значение '13' в поле 'Месяц'")
+    @DisplayName("One Number in month field")
+    void shouldTestOneNumInMonth() {
+        debitPage.fillingOutForm(DataHelper.getOneNumMonth());
+        debitPage.invalidFormat();
+    }
+
+    @Test
+    @DisplayName("'13' in month field")
     void shouldTest13Month() {
         debitPage.fillingOutForm(DataHelper.get13Month());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Покупка с незаполненным полем 'Год'")
+    @DisplayName("Empty year field")
     void shouldTestEmptyYearField() {
         debitPage.fillingOutForm(DataHelper.getEmptyYearField());
         debitPage.requiredField();
     }
 
     @Test
-    @DisplayName("Один символ в поле 'Год'")
+    @DisplayName("One simbol in year field")
     void shouldTestOneSimbolInYearField() {
         debitPage.fillingOutForm(DataHelper.getOneSimbolInYearField());
-        debitPage.incorrectDeadline();
+        debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Год ранее текущего в поле 'Год'")
+    @DisplayName("Earlier year in year field")
     void shouldTestEarlierYear() {
         debitPage.fillingOutForm(DataHelper.getEarlierYear());
         debitPage.deadlineIsOver();
     }
 
     @Test
-    @DisplayName("Год, превышающий срок карты")
-    void shouldTestOverYear() {
-        debitPage.fillingOutForm(DataHelper.getOverYear());
-        debitPage.successNotification();
+    @DisplayName("Last year in year field")
+    void shouldTestLastValidYear() {
+        debitPage.fillingOutForm(DataHelper.getLstYear());
+        debitPage.setSuccessNotificationVisible();
     }
 
     @Test
-    @DisplayName("Пустое поле 'Владелец'")
+    @DisplayName("Over 6 year in year field")
+    void shouldTestOverYear() {
+        debitPage.fillingOutForm(DataHelper.getOverYear());
+        debitPage.incorrectDeadline();
+    }
+
+    @Test
+    @DisplayName("Empty holder field")
     void shouldTestEmptyHolderField() {
         debitPage.fillingOutForm(DataHelper.getEmptyHolderField());
         debitPage.requiredField();
     }
 
     @Test
-    @DisplayName("Один символ в поле 'Владелец'")
+    @DisplayName("One simbol in holder field")
     void shouldTestOneLetterInHolderField() {
         debitPage.fillingOutForm(DataHelper.getOneLetter());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Кириллица в поле 'Владелец'")
+    @DisplayName("Rus name in holder field")
     void shouldTestRusHolderName() {
         debitPage.fillingOutForm(DataHelper.getRusHolder());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Цифры и символы в поле 'Владелец'")
+    @DisplayName("Numbers in holder field")
     void shouldTestNumberInHolderField() {
         debitPage.fillingOutForm(DataHelper.getNumberHolder());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Пустое поле 'CVC/CVV'")
+    @DisplayName("Empty CVC/CVV field")
     void shouldTestEmptyCVVField() {
         debitPage.fillingOutForm(DataHelper.getEmptyCVVField());
         debitPage.requiredField();
     }
 
     @Test
-    @DisplayName("Нулевое значение в поле 'CVC/CVV'")
+    @DisplayName("'000' in CVC/CVV field")
     void shouldTestZeroInCVVField() {
         debitPage.fillingOutForm(DataHelper.getZeroCVV());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Один символ в поле 'CVC/CVV'")
+    @DisplayName("One simbol in CVC/CVV field")
     void shouldTestOneSimbolCVV() {
         debitPage.fillingOutForm(DataHelper.getOneSimbolCVV());
         debitPage.invalidFormat();
     }
 
     @Test
-    @DisplayName("Буквы и спесимволы в поле 'CVC/CVV'")
+    @DisplayName("Letters in CVC/CVV field")
     void shouldTestLettersInCVVField() {
         debitPage.fillingOutForm(DataHelper.getLettersCVV());
         debitPage.invalidFormat();
     }
 
     /*@Test
-    @DisplayName("Незаполненная форма")
+    @DisplayName("Empty form")
     void shouldTestEmptyForm() {
         debitPage.fillingOutForm(DataHelper.getEmptyForm());
         debitPage.requiredField();

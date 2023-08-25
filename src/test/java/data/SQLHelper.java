@@ -17,19 +17,19 @@ public class SQLHelper {
     }
     @SneakyThrows
     public static Connection qetConn() {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "user", "password");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
     }
 
     @SneakyThrows
 
     public static String getStatusForPayment() {
-        String statusSQL = "SELECT code FROM payment_entity ORDER BY created DESC LIMIT 1";
+        String statusSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
         return getResult(statusSQL);
     }
 
     @SneakyThrows
     public static String getStatusForCredit() {
-        String statusSQL = "SELECT code FROM credit_entity ORDER BY created DESC LIMIT 1";
+        String statusSQL = "SELECT status FROM credit_entity ORDER BY created DESC LIMIT 1";
         return getResult(statusSQL);
     }
 

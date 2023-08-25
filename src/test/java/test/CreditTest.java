@@ -6,15 +6,15 @@ import data.DataHelper;
 import data.SQLHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import page.DebitPage;
+import page.CreditPage;
 import page.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DebitTest {
+public class CreditTest {
     private MainPage mainPage;
-    private DebitPage debitPage;
+    private CreditPage creditPage;
 
     @BeforeAll
     static void setUpAll() {
@@ -31,9 +31,8 @@ public class DebitTest {
         open("http://localhost:8080/");
         Configuration.holdBrowserOpen = true;
         mainPage = new MainPage();
-        debitPage = mainPage.goToDebitPage();
+        creditPage = mainPage.goToCreditPage();
     }
-
     @AfterEach
     public void clean() {
         SQLHelper.cleanDatabase();
@@ -42,188 +41,188 @@ public class DebitTest {
     @Test
     @DisplayName("Buy by approved card")
     void shouldTestBuyWithApprovedCard() {
-        debitPage.fillingOutForm(DataHelper.getNumberApprovedCard());
-        debitPage.setSuccessNotificationVisible();
+        creditPage.fillingOutForm(DataHelper.getNumberApprovedCard());
+        creditPage.successNotification();
         assertEquals("APPROVED", SQLHelper.getStatusForPayment());
     }
 
     @Test
     @DisplayName("Buy by declined card")
     void shouldTestBuyWithDeclinedCard() {
-        debitPage.fillingOutForm(DataHelper.getNumberDeclinedCard());
-        debitPage.errorNotification();
+        creditPage.fillingOutForm(DataHelper.getNumberDeclinedCard());
+        creditPage.errorNotification();
         assertEquals("DECLINED", SQLHelper.getStatusForPayment());
     }
 
     @Test
     @DisplayName("Empty card number field")
     void shouldTestEmptyCardNumberField() {
-        debitPage.fillingOutForm(DataHelper.getEmptyCardField());
-        debitPage.requiredField();
+        creditPage.fillingOutForm(DataHelper.getEmptyCardField());
+        creditPage.requiredField();
     }
 
     @Test
     @DisplayName("15 simbols in card number field")
-    void shouldTestNumberLess16Digits() {
-        debitPage.fillingOutForm(DataHelper.getNumberless16digits());
-        debitPage.invalidFormat();
+    void shouldTestNumberLess16Digits(){
+        creditPage.fillingOutForm(DataHelper.getNumberless16digits());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Random number card")
     void shouldTestRandomNumberCard() {
-        debitPage.fillingOutForm(DataHelper.getRandomNumber());
-        debitPage.errorNotification();
+        creditPage.fillingOutForm(DataHelper.getRandomNumber());
+        creditPage.errorNotification();
     }
 
     @Test
     @DisplayName("Card Number '0000 0000 0000 0000'")
     void shouldTestZeroNumberCard() {
-        debitPage.fillingOutForm(DataHelper.getZeroNumber());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getZeroNumber());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Empty month field")
     void shouldTestEmptyMonthField() {
-        debitPage.fillingOutForm(DataHelper.getEmptyMonthField());
-        debitPage.requiredField();
+        creditPage.fillingOutForm(DataHelper.getEmptyMonthField());
+        creditPage.requiredField();
     }
 
     @Test
     @DisplayName("Earlier month in month field")
     void shouldTestEarlierMonth() {
-        debitPage.fillingOutForm(DataHelper.getEarlierMonth());
-        debitPage.incorrectDeadline();
+        creditPage.fillingOutForm(DataHelper.getEarlierMonth());
+        creditPage.incorrectDeadline();
     }
 
     @Test
     @DisplayName("Next month in month field")
     void shouldTestNextMonth() {
-        debitPage.fillingOutForm(DataHelper.getNextMonth());
-        debitPage.setSuccessNotificationVisible();
+        creditPage.fillingOutForm(DataHelper.getNextMonth());
+        creditPage.successNotification();
     }
 
     @Test
     @DisplayName("'00' in month field")
     void shouldTestZeroMonth() {
-        debitPage.fillingOutForm(DataHelper.get00Month());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.get00Month());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("One Number in month field")
     void shouldTestOneNumInMonth() {
-        debitPage.fillingOutForm(DataHelper.getOneNumMonth());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getOneNumMonth());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("'13' in month field")
     void shouldTest13Month() {
-        debitPage.fillingOutForm(DataHelper.get13Month());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.get13Month());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Empty year field")
     void shouldTestEmptyYearField() {
-        debitPage.fillingOutForm(DataHelper.getEmptyYearField());
-        debitPage.requiredField();
+        creditPage.fillingOutForm(DataHelper.getEmptyYearField());
+        creditPage.requiredField();
     }
 
     @Test
     @DisplayName("One simbol in year field")
     void shouldTestOneSimbolInYearField() {
-        debitPage.fillingOutForm(DataHelper.getOneSimbolInYearField());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getOneSimbolInYearField());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Earlier year in year field")
     void shouldTestEarlierYear() {
-        debitPage.fillingOutForm(DataHelper.getEarlierYear());
-        debitPage.deadlineIsOver();
+        creditPage.fillingOutForm(DataHelper.getEarlierYear());
+        creditPage.deadlineIsOver();
     }
 
     @Test
-    @DisplayName("Last year in year field")
+    @DisplayName("Last valid year in year field")
     void shouldTestLastValidYear() {
-        debitPage.fillingOutForm(DataHelper.getLstYear());
-        debitPage.setSuccessNotificationVisible();
+        creditPage.fillingOutForm(DataHelper.getLstYear());
+        creditPage.successNotification();
     }
 
     @Test
     @DisplayName("Over 6 year in year field")
     void shouldTestOverYear() {
-        debitPage.fillingOutForm(DataHelper.getOverYear());
-        debitPage.incorrectDeadline();
+        creditPage.fillingOutForm(DataHelper.getOverYear());
+        creditPage.incorrectDeadline();
     }
 
     @Test
     @DisplayName("Empty holder field")
     void shouldTestEmptyHolderField() {
-        debitPage.fillingOutForm(DataHelper.getEmptyHolderField());
-        debitPage.requiredField();
+        creditPage.fillingOutForm(DataHelper.getEmptyHolderField());
+        creditPage.requiredField();
     }
 
     @Test
     @DisplayName("One simbol in holder field")
     void shouldTestOneLetterInHolderField() {
-        debitPage.fillingOutForm(DataHelper.getOneLetter());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getOneLetter());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Rus name in holder field")
     void shouldTestRusHolderName() {
-        debitPage.fillingOutForm(DataHelper.getRusHolder());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getRusHolder());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Numbers in holder field")
     void shouldTestNumberInHolderField() {
-        debitPage.fillingOutForm(DataHelper.getNumberHolder());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getNumberHolder());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Empty CVC/CVV field")
     void shouldTestEmptyCVVField() {
-        debitPage.fillingOutForm(DataHelper.getEmptyCVVField());
-        debitPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        creditPage.fillingOutForm(DataHelper.getEmptyCVVField());
+        creditPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
     }
 
     @Test
     @DisplayName("'000' in CVC/CVV field")
     void shouldTestZeroInCVVField() {
-        debitPage.fillingOutForm(DataHelper.getZeroCVV());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getZeroCVV());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("One simbol in CVC/CVV field")
     void shouldTestOneSimbolCVV() {
-        debitPage.fillingOutForm(DataHelper.getOneSimbolCVV());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getOneSimbolCVV());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Letters in CVC/CVV field")
     void shouldTestLettersInCVVField() {
-        debitPage.fillingOutForm(DataHelper.getLettersCVV());
-        debitPage.invalidFormat();
+        creditPage.fillingOutForm(DataHelper.getLettersCVV());
+        creditPage.invalidFormat();
     }
 
     @Test
     @DisplayName("Empty form")
     void shouldTestEmptyForm() {
-        debitPage.fillingOutForm(DataHelper.getEmptyForm());
-        debitPage.setRequiredFieldForNumberCard("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForMonthField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForYearField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForHolderField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        creditPage.fillingOutForm(DataHelper.getEmptyForm());
+        creditPage.setRequiredFieldForNumberCard("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForMonthField("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForYearField("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForHolderField("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
     }
 }

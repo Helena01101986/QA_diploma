@@ -52,6 +52,11 @@ public class DataHelper {
         return new CardInfo("4444 4444 4444 4441", getEarlierCurrentMonth(), getValidYear(), getValidHolder(), getValidCVV());
     }
 
+    /*Следующий валидный месяц*/
+    public static CardInfo getNextMonth() {
+        return new CardInfo("4444 4444 4444 4441", getNextAfterCurrentMonth(), getValidYear(), getValidHolder(), getValidCVV());
+    }
+
     /*Невалидный месяц "00"*/
     public static CardInfo get00Month() {
         return new CardInfo("4444 4444 4444 4441", "00", getValidYear(), getValidHolder(), getValidCVV());
@@ -87,7 +92,7 @@ public class DataHelper {
         return new CardInfo("4444 4444 4444 4441", getValidMonth(), getOver6Years(), getValidHolder(), getValidCVV());
     }
 
-    /*Год окончания карты*/
+    /*Год окончания карты (+5)*/
     public static CardInfo getLstYear() {
         return new CardInfo("4444 4444 4444 4441", getValidMonth(), getLastYear(), getValidHolder(), getValidCVV());
     }
@@ -138,13 +143,18 @@ public class DataHelper {
     }
 
     public static String getValidMonth() {
-        String validMonth = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+        String validMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
         return validMonth;
     }
 
     public static String getEarlierCurrentMonth() {
         String earlierBeforeCurrentMonth = LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
         return earlierBeforeCurrentMonth;
+    }
+
+    public static String getNextAfterCurrentMonth() {
+        String nextAfterCurrentMonth = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+        return nextAfterCurrentMonth;
     }
 
     public static String getValidYear() {

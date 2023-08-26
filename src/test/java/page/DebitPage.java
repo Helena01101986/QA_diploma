@@ -42,7 +42,7 @@ public class DebitPage {
     private SelenideElement incorrectDeadline = $x("//span[contains(text(), 'Неверно указан срок')]");
     private SelenideElement deadlineIsOver = $x("//span[contains(text(), 'Истёк срок')]");
 
-    public void setSuccessNotificationVisible() {
+    public void successNotification() {
         successNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Операция одобрена Банком."));
     }
 

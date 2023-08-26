@@ -29,7 +29,7 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getStatusForCredit() {
-        String statusSQL = "SELECT status FROM credit_entity ORDER BY created DESC LIMIT 1";
+        String statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         return getResult(statusSQL);
     }
 

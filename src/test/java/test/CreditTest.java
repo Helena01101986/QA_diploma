@@ -43,7 +43,7 @@ public class CreditTest {
     void shouldTestBuyWithApprovedCard() {
         creditPage.fillingOutForm(DataHelper.getNumberApprovedCard());
         creditPage.successNotification();
-        assertEquals("APPROVED", SQLHelper.getStatusForPayment());
+        assertEquals("APPROVED", SQLHelper.getStatusForCredit());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CreditTest {
     void shouldTestBuyWithDeclinedCard() {
         creditPage.fillingOutForm(DataHelper.getNumberDeclinedCard());
         creditPage.errorNotification();
-        assertEquals("DECLINED", SQLHelper.getStatusForPayment());
+        assertEquals("DECLINED", SQLHelper.getStatusForCredit());
     }
 
     @Test

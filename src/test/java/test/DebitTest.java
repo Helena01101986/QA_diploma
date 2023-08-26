@@ -43,7 +43,7 @@ public class DebitTest {
     @DisplayName("Buy by approved card")
     void shouldTestBuyWithApprovedCard() {
         debitPage.fillingOutForm(DataHelper.getNumberApprovedCard());
-        debitPage.setSuccessNotificationVisible();
+        debitPage.successNotification();
         assertEquals("APPROVED", SQLHelper.getStatusForPayment());
     }
 
@@ -101,7 +101,7 @@ public class DebitTest {
     @DisplayName("Next month in month field")
     void shouldTestNextMonth() {
         debitPage.fillingOutForm(DataHelper.getNextMonth());
-        debitPage.setSuccessNotificationVisible();
+        debitPage.successNotification();
     }
 
     @Test
@@ -150,7 +150,7 @@ public class DebitTest {
     @DisplayName("Last year in year field")
     void shouldTestLastValidYear() {
         debitPage.fillingOutForm(DataHelper.getLstYear());
-        debitPage.setSuccessNotificationVisible();
+        debitPage.successNotification();
     }
 
     @Test

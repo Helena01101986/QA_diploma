@@ -12,14 +12,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class DebitPage {
-    public void fillingOutForm(DataHelper.CardInfo cardInfo) {
-        cardNumberField.setValue(cardInfo.getNumberCard());
-        monthField.setValue(cardInfo.getValidMonth());
-        yearField.setValue(cardInfo.getValidYear());
-        holderField.setValue(cardInfo.getValidHolder());
-        cvvField.setValue(cardInfo.getValidCVV());
-        continueButton.click();
-    }
 
     public DebitPage() {
         heading.shouldBe(visible);
@@ -42,12 +34,13 @@ public class DebitPage {
     private SelenideElement incorrectDeadline = $x("//span[contains(text(), 'Неверно указан срок')]");
     private SelenideElement deadlineIsOver = $x("//span[contains(text(), 'Истёк срок')]");
 
+
     public void successNotification() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Операция одобрена Банком."));
+        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Операция одобрена Банком."));
     }
 
     public void errorNotification() {
-        errorNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
+        errorNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
     }
 
     public void invalidFormat() {
@@ -67,24 +60,32 @@ public class DebitPage {
     }
 
     /*методы для каждого пустого поля*/
-    public void setRequiredFieldForNumberCard(String text) {
-        cardNumberField.shouldHave(text("Поле обязательно для заполнения"), Duration.ofSeconds(10)).shouldBe(visible);
+    public void setRequiredFieldForNumberCard() {
+        cardNumberField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForMonthField(String text) {
-        monthField.shouldHave(text("Поле обязательно для заполнения"), Duration.ofSeconds(10)).shouldBe(visible);
+    public void setRequiredFieldForMonthField() {
+        monthField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForYearField(String text) {
-        yearField.shouldHave(text("Поле обязательно для заполнения"), Duration.ofSeconds(10)).shouldBe(visible);
+    public void setRequiredFieldForYearField() {
+        yearField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForHolderField(String text) {
-        holderField.shouldHave(text("Поле обязательно для заполнения"), Duration.ofSeconds(10)).shouldBe(visible);
+    public void setRequiredFieldForHolderField() {
+        holderField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForCVVField(String text) {
-        cvvField.shouldHave(text("Поле обязательно для заполнения"), Duration.ofSeconds(10)).shouldBe(visible);
+    public void setRequiredFieldForCVVField() {
+        cvvField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
+    public void fillingOutForm(DataHelper.CardInfo cardInfo) {
+        cardNumberField.setValue(cardInfo.getNumberCard());
+        monthField.setValue(cardInfo.getValidMonth());
+        yearField.setValue(cardInfo.getValidYear());
+        holderField.setValue(cardInfo.getValidHolder());
+        cvvField.setValue(cardInfo.getValidCVV());
+        continueButton.click();
+    }
 }

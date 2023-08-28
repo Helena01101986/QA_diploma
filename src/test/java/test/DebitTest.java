@@ -192,7 +192,7 @@ public class DebitTest {
     @DisplayName("Empty CVC/CVV field")
     void shouldTestEmptyCVVField() {
         debitPage.fillingOutForm(DataHelper.getEmptyCVVField());
-        debitPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        debitPage.setRequiredFieldForCVVField();
     }
 
     @Test
@@ -220,10 +220,10 @@ public class DebitTest {
     @DisplayName("Empty form")
     void shouldTestEmptyForm() {
         debitPage.fillingOutForm(DataHelper.getEmptyForm());
-        debitPage.setRequiredFieldForNumberCard("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForMonthField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForYearField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForHolderField("Поле обязательно для заполнения");
-        debitPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        debitPage.setRequiredFieldForNumberCard();
+        debitPage.setRequiredFieldForMonthField();
+        debitPage.setRequiredFieldForYearField();
+        debitPage.setRequiredFieldForHolderField();
+        debitPage.setRequiredFieldForCVVField();
     }
 }

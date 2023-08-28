@@ -33,6 +33,7 @@ public class CreditTest {
         mainPage = new MainPage();
         creditPage = mainPage.goToCreditPage();
     }
+
     @AfterEach
     public void clean() {
         SQLHelper.cleanDatabase();
@@ -63,7 +64,7 @@ public class CreditTest {
 
     @Test
     @DisplayName("15 simbols in card number field")
-    void shouldTestNumberLess16Digits(){
+    void shouldTestNumberLess16Digits() {
         creditPage.fillingOutForm(DataHelper.getNumberless16digits());
         creditPage.invalidFormat();
     }
@@ -191,7 +192,7 @@ public class CreditTest {
     @DisplayName("Empty CVC/CVV field")
     void shouldTestEmptyCVVField() {
         creditPage.fillingOutForm(DataHelper.getEmptyCVVField());
-        creditPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForCVVField();
     }
 
     @Test
@@ -219,10 +220,10 @@ public class CreditTest {
     @DisplayName("Empty form")
     void shouldTestEmptyForm() {
         creditPage.fillingOutForm(DataHelper.getEmptyForm());
-        creditPage.setRequiredFieldForNumberCard("Поле обязательно для заполнения");
-        creditPage.setRequiredFieldForMonthField("Поле обязательно для заполнения");
-        creditPage.setRequiredFieldForYearField("Поле обязательно для заполнения");
-        creditPage.setRequiredFieldForHolderField("Поле обязательно для заполнения");
-        creditPage.setRequiredFieldForCVVField("Поле обязательно для заполнения");
+        creditPage.setRequiredFieldForNumberCard();
+        creditPage.setRequiredFieldForMonthField();
+        creditPage.setRequiredFieldForYearField();
+        creditPage.setRequiredFieldForHolderField();
+        creditPage.setRequiredFieldForCVVField();
     }
 }

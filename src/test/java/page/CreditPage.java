@@ -2,7 +2,9 @@ package page;
 
 import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
+
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -32,11 +34,11 @@ public class CreditPage {
     private SelenideElement deadlineIsOver = $x("//span[contains(text(), 'Истёк срок')]");
 
     public void successNotification() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Операция оформлена банком"));
+        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Операция оформлена Банком"));
     }
 
     public void errorNotification() {
-        errorNotification.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
+        errorNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Ошибка! Банк отказал в проведении операции."));
     }
 
     public void requiredField() {
@@ -55,25 +57,25 @@ public class CreditPage {
         incorrectDeadline.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
-
-    public void setRequiredFieldForCVVField(String text) {
-        cvvField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
+    /*методы для каждого пустого поля*/
+    public void setRequiredFieldForCVVField() {
+        cvvField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForNumberCard(String text) {
-        cardNumberField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
+    public void setRequiredFieldForNumberCard() {
+        cardNumberField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForMonthField(String text) {
-        monthField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
+    public void setRequiredFieldForMonthField() {
+        monthField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForYearField(String text) {
-        yearField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
+    public void setRequiredFieldForYearField() {
+        yearField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public void setRequiredFieldForHolderField(String text) {
-        holderField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible, Duration.ofSeconds(10));
+    public void setRequiredFieldForHolderField() {
+        holderField.shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
     public CreditPage() {

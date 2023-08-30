@@ -19,7 +19,7 @@
 
  ## Установка и запуск.
 
- 1. Склонировать репозиторий на локальный ПК: 
+ 1. Клонировать репозиторий на локальный ПК: 
 
      git clone git@github.com:Helena01101986/QA_diploma.git
 
@@ -40,10 +40,14 @@
 
     ./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"
 
-7. Запусстить тесты для PostgreSQL:
+7. Запустить тесты для PostgreSQL:
 
     ./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"
 
 8. Для генерации и автоматического отчета Allure в браузере:
 
     ./gradlew allureServe
+
+9. После завершения работы остановить работу контейнеров и удалить их:
+
+    docker-compose down

@@ -34,7 +34,7 @@ public class CreditPage {
     private SelenideElement deadlineIsOver = $x("//span[contains(text(), 'Истёк срок')]");
 
     public void successNotification() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Операция оформлена Банком"));
+        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Успешно Операция одобрена Банком."));
     }
 
     public void errorNotification() {

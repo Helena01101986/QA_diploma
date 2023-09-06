@@ -36,7 +36,7 @@ public class DebitPage {
 
 
     public void successNotification() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Операция одобрена Банком."));
+        successNotification.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Успешно Операция одобрена Банком."));
     }
 
     public void errorNotification() {

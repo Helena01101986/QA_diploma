@@ -19,12 +19,12 @@ public class DebitPage {
 
     /*поля и кнопки*/
     private SelenideElement heading = $x("//h3[text()='Оплата по карте']");
-    private static SelenideElement cardNumberField = $x("//span[text()='Номер карты']/..//input");
-    private static SelenideElement monthField = $x("//span[text()='Месяц']/..//input");
-    private static SelenideElement yearField = $x("//span[text()='Год']/..//input");
-    private static SelenideElement holderField = $x("//span[text()='Владелец']/..//input");
-    private static SelenideElement cvvField = $x("//span[contains(text(),'CVV')]/..//input");
-    private static SelenideElement continueButton = $x("//span[text()='Продолжить']");
+    private SelenideElement cardNumberField = $x("//span[text()='Номер карты']/..//input");
+    private SelenideElement monthField = $x("//span[text()='Месяц']/..//input");
+    private SelenideElement yearField = $x("//span[text()='Год']/..//input");
+    private SelenideElement holderField = $x("//span[text()='Владелец']/..//input");
+    private SelenideElement cvvField = $x("//span[contains(text(),'CVV')]/..//input");
+    private SelenideElement continueButton = $x("//span[text()='Продолжить']");
 
     /*всплывающие сообщения*/
     private SelenideElement successNotification = $(".notification_status_ok");

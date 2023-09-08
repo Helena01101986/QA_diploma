@@ -6,7 +6,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 public class SQLHelper {
@@ -31,8 +30,8 @@ public class SQLHelper {
         String statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         return getResult(statusSQL);
     }
-
-    private static String getResult(String query) throws SQLException {
+    @SneakyThrows
+    private static String getResult(String query) {
         String result = "";
         var runner = new QueryRunner();
         try (var conn = qetConn()) {

@@ -84,8 +84,8 @@ public class CreditPage {
 
     public void fillingOutForm(DataHelper.CardInfo cardInfo) {
         cardNumberField.setValue(cardInfo.getNumberCard());
-        monthField.setValue(cardInfo.getValidMonth());
-        yearField.setValue(cardInfo.getValidYear());
+        monthField.setValue(cardInfo.getMonth());
+        yearField.setValue(cardInfo.getYear());
         holderField.setValue(cardInfo.getValidHolder());
         cvvField.setValue(cardInfo.getValidCVV());
         continueButton.click();
